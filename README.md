@@ -51,7 +51,7 @@ Drop the standalone build straight into `<head>` — it attaches
 <script src="/node_modules/open-in-native-browser/dist/auto.global.js"></script>
 ```
 
-Or, once you've published/deployed it, from a CDN:
+Or straight from a CDN, no install needed:
 
 ```html
 <script src="https://unpkg.com/open-in-native-browser/dist/auto.global.js"></script>
@@ -118,21 +118,26 @@ or `!important` if needed.
   the original requirement — it does not attempt to detect other in-app
   browsers (TikTok, LinkedIn, etc.).
 
-## Publishing this package yourself
+## Troubleshooting
 
-This project is scaffolded and ready to publish, but publishing requires
-*your* npm account — no one can publish on your behalf.
+- **Banner shows up on a regular browser.** It shouldn't — `detectEnvironment()`
+  only reports `isInApp: true` for Instagram/Facebook User-Agents. If you're
+  seeing it elsewhere, check whether you're testing with a UA-spoofing
+  extension, and pass your actual `navigator.userAgent` into
+  `IABBreakout.detectEnvironment(ua)` to inspect what's being matched.
+- **Auto-breakout doesn't fire on a specific device.** This is expected
+  sometimes — see "Limitations & honesty note" above. The banner's manual
+  "Open" button is the reliable fallback; make sure `showBanner` isn't set
+  to `false`.
+- **Banner won't reappear after I dismissed it while testing.** That's
+  `respectDismiss` (default `true`) suppressing it for the rest of the
+  browser session. Clear `sessionStorage`, use a private/incognito tab, or
+  pass `{ forceShow: true }` while testing.
 
-```bash
-# from the package root
-npm login                 # if you haven't already
-npm publish --access public
-```
+## Contributing
 
-Before publishing, you'll likely want to:
-- Update `name` in `package.json` if `open-in-native-browser` is taken on the registry.
-- Fill in `author` and the `repository`/`homepage`/`bugs` URLs.
-- Bump `version` following semver on subsequent releases (`npm version patch`).
+Issues and pull requests are welcome — see the repo's issue tracker linked
+in `package.json`.
 
 ## License
 

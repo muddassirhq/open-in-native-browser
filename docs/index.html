@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>open-in-native-browser — live demo</title>
+
+  <!-- Loads the published package straight from a CDN. Swap for your own
+       /node_modules copy if you're testing an unpublished/local change. -->
+  <script src="https://unpkg.com/open-in-native-browser/dist/auto.global.js"></script>
+
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      max-width: 640px;
+      margin: 40px auto;
+      padding: 0 20px;
+      line-height: 1.5;
+      color: #111318;
+    }
+    h1 { font-size: 1.4rem; }
+    code {
+      background: #f2f2f2;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.9em;
+    }
+    .status {
+      margin-top: 24px;
+      padding: 16px;
+      border-radius: 10px;
+      border: 1px solid #ddd;
+      background: #fafafa;
+    }
+    .status dt { font-weight: 600; }
+    .status dl { display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; margin: 0; }
+    .pill {
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: 999px;
+      font-size: 0.85em;
+      font-weight: 600;
+    }
+    .pill--yes { background: #dff5e1; color: #146c2e; }
+    .pill--no { background: #f1f1f1; color: #666; }
+    .steps { background: #fff8e6; border: 1px solid #f1dca4; border-radius: 10px; padding: 16px; }
+    a.button {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 10px 16px;
+      background: #111318;
+      color: #fff;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <h1>open-in-native-browser — live demo</h1>
+  <p>
+    This page loads the library automatically (see <code>&lt;head&gt;</code>
+    source). If you're viewing it in a regular mobile or desktop browser,
+    nothing extra happens — that's correct behavior.
+  </p>
+
+  <div class="steps">
+    <strong>To actually see it work:</strong> this only does anything inside
+    Instagram's or Facebook's in-app browser. Share this page's URL in an
+    Instagram bio link, story, or DM to yourself, then tap it from inside
+    the Instagram app. You should see either an automatic handoff to Safari/
+    Chrome, or the fallback banner with a manual "Open" button.
+  </div>
+
+  <div class="status" id="status">
+    <dl id="status-list">
+      <dt>Loading…</dt><dd></dd>
+    </dl>
+  </div>
+
+  <p style="margin-top:24px;">
+    <a class="button" id="force-banner">Force-show the banner (for testing)</a>
+  </p>
+  <p style="font-size:0.9em;color:#666;">
+    This button calls <code>init({ forceShow: true, autoBreakout: false })</code>
+    directly so you can preview the banner's look on any device, even outside
+    an in-app browser — it does not simulate a real in-app browser detection.
+  </p>
+
+  <script>
+    function renderStatus() {
+      var env = window.OpenInNativeBrowser.detectEnvironment();
+      var list = document.getElementById('status-list');
+      function pill(val) {
+        return '<span class="pill ' + (val ? 'pill--yes' : 'pill--no') + '">' + (val ? 'yes' : 'no') + '</span>';
+      }
+      list.innerHTML =
+        '<dt>In Instagram/Facebook in-app browser</dt><dd>' + pill(env.isInApp) + '</dd>' +
+        '<dt>Instagram</dt><dd>' + pill(env.isInstagram) + '</dd>' +
+        '<dt>Facebook</dt><dd>' + pill(env.isFacebook) + '</dd>' +
+        '<dt>iOS</dt><dd>' + pill(env.isIOS) + '</dd>' +
+        '<dt>Android</dt><dd>' + pill(env.isAndroid) + '</dd>' +
+        '<dt>User-Agent</dt><dd style="word-break:break-all;font-size:0.85em;">' + env.ua + '</dd>';
+    }
+    renderStatus();
+
+    document.getElementById('force-banner').addEventListener('click', function (e) {
+      e.preventDefault();
+      window.OpenInNativeBrowser.init({ forceShow: true, autoBreakout: false });
+    });
+  </script>
+</body>
+</html>
