@@ -1,0 +1,54 @@
+{
+  "name": "open-in-native-browser",
+  "version": "1.0.0",
+  "description": "Detect Instagram/Facebook in-app browsers and help users escape to their native browser, with a dismissible fallback banner and manual escape link. Works with any framework or plain HTML.",
+  "main": "src/index.js",
+  "module": "src/index.esm.js",
+  "unpkg": "dist/auto.global.js",
+  "jsdelivr": "dist/auto.global.js",
+  "browser": "dist/auto.global.js",
+  "exports": {
+    ".": {
+      "import": "./src/index.esm.js",
+      "require": "./src/index.js",
+      "default": "./src/index.js"
+    },
+    "./auto": "./dist/auto.global.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "src",
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "sideEffects": [
+    "./dist/auto.global.js"
+  ],
+  "keywords": [
+    "instagram",
+    "facebook",
+    "in-app-browser",
+    "webview",
+    "breakout",
+    "escape",
+    "meta",
+    "deep-link",
+    "external-browser",
+    "ios",
+    "android"
+  ],
+  "author": "",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YOUR_USERNAME/open-in-native-browser.git"
+  },
+  "homepage": "https://github.com/YOUR_USERNAME/open-in-native-browser#readme",
+  "bugs": {
+    "url": "https://github.com/YOUR_USERNAME/open-in-native-browser/issues"
+  },
+  "engines": {
+    "node": ">=12"
+  }
+}

@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>open-in-native-browser — plain HTML example</title>
+
+  <!-- Option A: load from your own /dist copy after `npm install open-in-native-browser` -->
+  <script src="/node_modules/open-in-native-browser/dist/auto.global.js"></script>
+
+  <!-- Option B: load from a CDN once published to npm
+  <script src="https://unpkg.com/open-in-native-browser/dist/auto.global.js"></script>
+  -->
+
+  <!-- Optional: customize before the script above runs, e.g.
+  <script>
+    window.OPEN_IN_NATIVE_BROWSER_OPTIONS = {
+      message: "Open this in your browser for the full experience.",
+      ctaLabel: "Open in browser"
+    };
+  </script>
+  -->
+</head>
+<body>
+  <h1>Hello world</h1>
+  <p>If you open this page from Instagram or Facebook's in-app browser, it will
+     try to hand you off to your device's default browser automatically, and
+     show a small banner with a manual "Open" button if that fails.</p>
+</body>
+</html>
