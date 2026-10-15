@@ -1,15 +1,16 @@
 {
   "name": "open-in-native-browser",
-  "version": "1.0.1",
-  "description": "Detect Instagram/Facebook in-app browsers and help users escape to their native browser, with a dismissible fallback banner and manual escape link. Works with any framework or plain HTML.",
+  "version": "2.0.0",
+  "description": "Make links tapped in Instagram, Facebook, LinkedIn, TikTok, Threads, X, Snapchat, WhatsApp and other in-app browsers open in the visitor's real browser (and from there, the right app). Auto handoff + fallback banner. Zero dependencies, any framework.",
   "main": "src/index.js",
-  "module": "src/index.esm.js",
+  "module": "src/index.mjs",
   "unpkg": "dist/auto.global.js",
   "jsdelivr": "dist/auto.global.js",
   "browser": "dist/auto.global.js",
   "exports": {
     ".": {
-      "import": "./src/index.esm.js",
+      "types": "./index.d.ts",
+      "import": "./src/index.mjs",
       "require": "./src/index.js",
       "default": "./src/index.js"
     },
@@ -19,6 +20,9 @@
   "files": [
     "src",
     "dist",
+    "index.d.ts",
+    "skills",
+    "llms.txt",
     "README.md",
     "LICENSE"
   ],
@@ -26,17 +30,32 @@
     "./dist/auto.global.js"
   ],
   "keywords": [
-    "instagram",
+    "android",
+    "breakout",
+    "deep-link",
+    "disallowed_useragent",
+    "escape",
+    "external-browser",
     "facebook",
     "in-app-browser",
-    "webview",
-    "breakout",
-    "escape",
-    "meta",
-    "deep-link",
-    "external-browser",
+    "in-app-browser-escape",
+    "instagram",
     "ios",
-    "android"
+    "line",
+    "link-in-bio",
+    "link-shortener",
+    "linkedin",
+    "meta",
+    "open-in-browser",
+    "snapchat",
+    "telegram",
+    "threads",
+    "tiktok",
+    "twitter",
+    "webview",
+    "wechat",
+    "whatsapp",
+    "x-safari"
   ],
   "author": "muddassirhq",
   "license": "MIT",
@@ -44,11 +63,17 @@
     "type": "git",
     "url": "git+https://github.com/muddassirhq/open-in-native-browser.git"
   },
-  "homepage": "https://github.com/muddassirhq/open-in-native-browser#readme",
+  "homepage": "https://muddassirhq.github.io/open-in-native-browser",
   "bugs": {
     "url": "https://github.com/muddassirhq/open-in-native-browser/issues"
   },
   "engines": {
     "node": ">=12"
+  },
+  "types": "index.d.ts",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "node scripts/build.mjs && node --test test/detect.test.mjs",
+    "prepublishOnly": "npm test"
   }
 }

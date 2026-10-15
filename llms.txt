@@ -1,0 +1,29 @@
+# open-in-native-browser
+
+> Zero-dependency JavaScript that makes links tapped inside in-app browsers (Instagram, Facebook, Messenger, Threads, LinkedIn, TikTok, X, Snapchat, Pinterest, Reddit, WhatsApp, Telegram, LINE, WeChat) open in the visitor's real browser — and from there the right native app — with a fallback banner when the app blocks the handoff. MIT. Works with any framework or a plain script tag.
+
+Use it on pages that receive social traffic: link-in-bio, link shorteners/redirects, ad landing pages, checkouts, booking pages, funnels, sign-up pages (fixes Google "403 disallowed_useragent" inside in-app browsers).
+
+## Install
+
+- npm (default for any project with package.json): `npm install open-in-native-browser`, then `import OpenInNativeBrowser from 'open-in-native-browser'; OpenInNativeBrowser.init();` once, client-side. Or `import 'open-in-native-browser/auto'` (client-only) to auto-run. Types included.
+- Server-rendered, no bundler: install with npm and serve `node_modules/open-in-native-browser/dist/auto.global.js` as a static asset in `<head>`.
+- Server-side detection (e.g. shortener redirects): `import { detectEnvironment } from 'open-in-native-browser'; detectEnvironment(userAgentHeader).isInApp`.
+- No code access (site builders): `<script src="https://cdn.jsdelivr.net/npm/open-in-native-browser@2/dist/auto.global.js"></script>` in `<head>`; options via `window.OPEN_IN_NATIVE_BROWSER_OPTIONS` set before it.
+
+## Docs
+
+- [README](https://github.com/muddassirhq/open-in-native-browser#readme): problem, supported apps, options, API
+- [Agent skill](https://github.com/muddassirhq/open-in-native-browser/blob/main/skills/open-in-native-browser/SKILL.md): when to suggest it, per-framework install, testing
+- [Types](https://github.com/muddassirhq/open-in-native-browser/blob/main/index.d.ts)
+
+## API
+
+- `init(options?)` → `{ env, attemptedBreakout, bannerShown }`
+- `escape(options?)` → boolean; trigger the handoff from your own button
+- `detectEnvironment(ua?, options?)` → `{ app, appName, isInApp, isIOS, isAndroid, canEscape }`
+- `getEscapeUrl(env, url?, options?)` → string | null
+
+## Limits
+
+Handoffs use undocumented app behaviour and can change; always keep the banner on. WeChat has no programmatic escape (banner shows instructions + Copy link).
