@@ -50,28 +50,33 @@ var APPS = [
 var TELEGRAM = { key: 'telegram', name: 'Telegram', ios: 'x-safari', android: 'intent', autoIOS: true };
 var GENERIC = { key: 'webview', name: 'this app', ios: 'x-safari', android: 'intent', autoIOS: false };
 
+// Every rule is scoped to #oinb-banner and starts with a reset, so host-page
+// CSS (e.g. `button{display:block;width:100%}`) can't squash the banner.
+var B = '#' + BANNER_ID;
 var BANNER_CSS = [
-  '#' + BANNER_ID + '.oinb-banner{',
+  B + '.oinb-banner{',
   'position:fixed;top:-160px;left:12px;right:12px;z-index:2147483647;',
   'display:flex;align-items:center;gap:10px;padding:12px 14px;',
-  'margin-top:env(safe-area-inset-top);',
+  'margin:env(safe-area-inset-top) 0 0;width:auto;height:auto;max-width:none;',
   'background:#111318;color:#fff;border-radius:14px;',
   'box-shadow:0 8px 24px rgba(0,0,0,.25);',
   'font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;',
-  'font-size:14px;line-height:1.4;transition:top .35s ease;box-sizing:border-box;',
+  'font-size:14px;line-height:1.4;text-align:left;transition:top .35s ease;box-sizing:border-box;',
   '}',
-  '#' + BANNER_ID + '.oinb-banner--visible{top:12px;}',
-  '.oinb-banner__text{flex:1;min-width:0;overflow-wrap:anywhere;}',
-  '.oinb-banner__actions{display:flex;gap:6px;flex-shrink:0;}',
-  '.oinb-banner__cta,.oinb-banner__copy{font:inherit;font-weight:600;padding:8px 14px;',
-  'border-radius:999px;text-decoration:none;white-space:nowrap;cursor:pointer;border:0;}',
-  '.oinb-banner__cta{background:#fff;color:#111318;}',
-  '.oinb-banner__copy{background:rgba(255,255,255,.14);color:#fff;}',
-  '.oinb-banner__close{background:transparent;border:none;color:#9aa0a6;font-size:20px;',
+  B + '.oinb-banner--visible{top:12px;}',
+  B + ' *{box-sizing:border-box;margin:0;float:none;position:static;width:auto;height:auto;',
+  'min-width:0;min-height:0;max-width:none;text-transform:none;letter-spacing:normal;text-shadow:none;}',
+  B + ' .oinb-banner__text{display:block;flex:1;min-width:0;overflow-wrap:anywhere;}',
+  B + ' .oinb-banner__actions{display:flex;gap:6px;flex-shrink:0;}',
+  B + ' .oinb-banner__cta,' + B + ' .oinb-banner__copy{display:inline-block;font:inherit;font-weight:600;',
+  'padding:8px 14px;border-radius:999px;text-decoration:none;white-space:nowrap;cursor:pointer;border:0;}',
+  B + ' .oinb-banner__cta{background:#fff;color:#111318;}',
+  B + ' .oinb-banner__copy{background:rgba(255,255,255,.14);color:#fff;}',
+  B + ' .oinb-banner__close{display:inline-block;background:transparent;border:none;color:#9aa0a6;font-size:20px;',
   'cursor:pointer;padding:0 2px;line-height:1;flex-shrink:0;}',
-  '@media (max-width:420px){#' + BANNER_ID + '.oinb-banner{flex-wrap:wrap;}',
-  '.oinb-banner__text{flex-basis:calc(100% - 30px);}.oinb-banner__actions{margin-left:auto;}}',
-  '@media (min-width:640px){#' + BANNER_ID + '.oinb-banner{left:auto;right:20px;max-width:460px;}}'
+  '@media (max-width:420px){' + B + '.oinb-banner{flex-wrap:wrap;}',
+  B + ' .oinb-banner__text{flex-basis:calc(100% - 30px);}' + B + ' .oinb-banner__actions{margin-left:auto;}}',
+  '@media (min-width:640px){' + B + '.oinb-banner{left:auto;right:20px;max-width:460px;}}'
 ].join('');
 
 var DEFAULTS = {
