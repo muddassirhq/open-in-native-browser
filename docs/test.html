@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>open-in-native-browser v2 — phone test</title>
+  <style>
+    body{font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;margin:0;padding:96px 16px 32px;background:#f6f7f9;color:#111318}
+    h1{font-size:20px;margin:0 0 12px}
+    table{width:100%;border-collapse:collapse;background:#fff;border-radius:10px;overflow:hidden;font-size:14px}
+    td{padding:8px 10px;border-bottom:1px solid #eee;vertical-align:top;overflow-wrap:anywhere}
+    td:first-child{font-weight:600;width:34%;color:#555}
+    .ok{color:#0a7d2c;font-weight:700}.no{color:#b3261e;font-weight:700}
+    button,a.btn{display:block;width:100%;margin:10px 0 0;padding:12px;font:inherit;font-weight:600;border:0;border-radius:10px;background:#111318;color:#fff;text-align:center;text-decoration:none}
+    a.btn.alt,button.alt{background:#e4e6ea;color:#111318}
+    p{font-size:14px;color:#555}
+  </style>
+</head>
+<body>
+  <h1>OINB v2 phone test</h1>
+  <table id="env"></table>
+  <a class="btn" id="escape" href="#">Escape now (tap)</a>
+  <button class="alt" id="banner">Show banner again</button>
+  <a class="btn alt" id="toggle" href="#"></a>
+  <p>Open this link inside LinkedIn (post, comment or DM). With auto on, Android jumps to Chrome immediately; iOS shows the banner and needs a tap. Use the "auto off" link to see diagnostics inside the app.</p>
+
+  <script>window.OPEN_IN_NATIVE_BROWSER_NO_AUTOINIT = true;</script>
+  <script src="../dist/auto.global.js"></script>
+  <script>
+    var O = window.OpenInNativeBrowser;
+    var auto = !/[?&]auto=0/.test(location.search);
+    var env = O.detectEnvironment();
+    var url = O.getEscapeUrl(env);
+    var rows = [
+      ['Library', 'v2 (branch build)'],
+      ['In-app?', env.isInApp ? '<span class="ok">Yes — ' + env.appName + '</span>' : '<span class="no">No (real browser)</span>'],
+      ['Platform', env.isIOS ? 'iOS' : env.isAndroid ? 'Android' : 'Other'],
+      ['Strategy', env._strategy || '—'],
+      ['Auto on iOS', String(env._autoIOS)],
+      ['Escape URL', url ? url.replace(/</g, '&lt;') : '—'],
+      ['Auto mode', auto ? 'on (real behaviour)' : 'off (diagnostics only)'],
+      ['User agent', env.ua.replace(/</g, '&lt;')]
+    ];
+    document.getElementById('env').innerHTML = rows.map(function (r) { return '<tr><td>' + r[0] + '</td><td>' + r[1] + '</td></tr>'; }).join('');
+    var esc = document.getElementById('escape');
+    if (url) esc.href = url; else { esc.textContent = 'No escape for this app'; esc.removeAttribute('href'); }
+    var t = document.getElementById('toggle');
+    t.textContent = auto ? 'Reload with auto off' : 'Reload with auto on';
+    t.href = auto ? '?auto=0' : '?';
+    try { sessionStorage.removeItem('oinb_dismissed'); sessionStorage.removeItem('oinb_tried'); } catch (e) {}
+    O.init({ autoBreakout: auto, forceShow: true });
+    document.getElementById('banner').onclick = function () {
+      var b = document.getElementById('oinb-banner'); if (b) b.remove();
+      O.init({ autoBreakout: false, forceShow: true, bannerDelay: 0 });
+    };
+  </script>
+</body>
+</html>
