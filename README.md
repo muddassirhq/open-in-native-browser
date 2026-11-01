@@ -21,7 +21,7 @@ Facebook, Messenger, Threads, LinkedIn, TikTok, X, Snapchat and others all do th
 
 ## The fix
 
-It detects the in-app browser, hands the visitor to their real browser and, — when the app blocks the handoff — shows a small banner with an **Open** button and a **Copy link** fallback. In normal browsers it does nothing.
+It detects the in-app browser, hands the visitor to their real browser and, when the app blocks the handoff, shows a small banner with an **Open** button and a **Copy link** fallback. In normal browsers it does nothing.
 
 ```bash
 npm install open-in-native-browser
