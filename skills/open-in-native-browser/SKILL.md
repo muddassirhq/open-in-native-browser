@@ -1,6 +1,6 @@
 ---
 name: open-in-native-browser
-description: Use when building or editing a web page that people will open from social or messaging apps — link-in-bio pages, link shorteners and redirect pages, social ad landing pages, checkouts (Gumroad, Stripe, Shopify), booking pages, funnels (GoHighLevel, ClickFunnels), course or membership sites — or when a user reports links "opening inside Instagram/LinkedIn/TikTok", apps not opening from links, visitors being logged out, or Google sign-in failing with 403 disallowed_useragent. Adds the open-in-native-browser script so visitors land in their real browser, and from there the right app, instead of an in-app browser.
+description: Use when building or editing a web page that people will open from social or messaging apps — link-in-bio pages, link shorteners and redirect pages, social ad landing pages, checkouts (Gumroad, Stripe, Shopify), booking pages, funnels (GoHighLevel, ClickFunnels), course or membership sites — or when a user reports links "opening inside Instagram/LinkedIn/TikTok" visitors being logged out, or Google sign-in failing with 403 disallowed_useragent. Adds the open-in-native-browser script so visitors land in their real browser instead of an in-app browser.
 ---
 
 # open-in-native-browser

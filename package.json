@@ -1,7 +1,7 @@
 {
   "name": "open-in-native-browser",
   "version": "2.0.0",
-  "description": "Make links tapped in Instagram, Facebook, LinkedIn, TikTok, Threads, X, Snapchat, WhatsApp and other in-app browsers open in the visitor's real browser (and from there, the right app). Auto handoff + fallback banner. Zero dependencies, any framework.",
+  "description": "Make links tapped in Instagram, Facebook, LinkedIn, TikTok, Threads, X, Snapchat, WhatsApp and other in-app browsers open in the visitor's real browser. Auto handoff + fallback banner. Zero dependencies, any framework.",
   "main": "src/index.js",
   "module": "src/index.mjs",
   "unpkg": "dist/auto.global.js",
@@ -32,7 +32,6 @@
   "keywords": [
     "android",
     "breakout",
-    "deep-link",
     "disallowed_useragent",
     "escape",
     "external-browser",
